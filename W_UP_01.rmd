@@ -5,11 +5,7 @@ date: "Summer 2023"
 output: html_document
 ---
 
-
-
 The report structure should include five sections.  see below
-
-
 
 ```{r include=FALSE,echo=FALSE}
 require(tigerstats)
@@ -21,13 +17,15 @@ mydata <- read.csv(file="pushups.csv")
 
 <!--In this section you explain what you are trying to show. Where did the data come from? What is the research or other question you are trying to answer?!-->
 
-Create an Rstudio project in your shared space on rstudio.cloud.  Using the dataset called pushups from the tigerstats package in R; answer the question posed by this null and alternate hypothesis in an html markdown document.
+In this study, we are trying to figure out if there is a difference in the amount of pushups that line players can do vs the amount of pushups that skill players can do. We gathered this data from the  Georgetown College football team. Is there a statisitcal difference in teh average number of pushups between both positions?
 
 $H_0$: There is no difference between the average number of pushups of line vs skill players
 
 $H_A$: The average number of pushups done by line players is statistically different than that of skill players.
 
 # Methods
+
+This study will be a numerical ~ categorical study. Numerical for the average number of push ups and catergorical is for the different positions. The method we will be using is a box plot. For the numerical descriptive results we will be using a numerical summary. Finally, for the inferential we are using a t-test.
 
 <!--Decide on your methods: use "variable analysis" or other appropriate descriptors. Make sure to choose at least one graphical method and at least one numerical method.!-->
 
@@ -41,16 +39,33 @@ $H_A$: The average number of pushups done by line players is statistically diffe
 
 <!--Graphical results here. Make sure to show your code. Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too. Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+boxplot(pushups~position,data=mydata)
+```
+
+This boxplot suggests that the skill position on average does more pushups than the line position does. The average for line position is around 20 or less pushups and the average for the skill position is around 60 pushups.
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
-## Inferential Results
+```{r}
+favstats(pushups~position,data=mydata)
+```
+
+In this numerical summary, we are being shown that the skill players are doing approxiamtely 3x more pushups than the line players are. The mean for the skill players is about 49, while the mean for the line players is around 17 pushups, pointing towards the possibility that there is a difference between the two positions and the amount of pushups that they can do. The difference between the two was around 32 pushups, this was in a 2 minute interval.
+
+### Inferential Results
 
 <!--State hypothesis clearly. Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc. Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+t.test(pushups~position,data=mydata)
+```
+With this t-test, we got a p-value of 0.0000009421, concluding that there is a difference between the average amount of pushups between line and skill players. Skill players are doing about 3x more pushups overall than the line players. Therefore, we are rejecting the null hypothesis. 
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here. If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason. Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
+In conclusion, we are rejecting the null hypothesis because there is a clear distinction between the positions and the amount of pushups they can do. On average, the skill players do 3x more pushups than the line players do. The mean for the skill players was 49 and the median for the line players was 17, a difference of around 33 pushups, a very clear difference.
